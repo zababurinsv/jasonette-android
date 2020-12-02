@@ -1,0 +1,28 @@
+{
+  "$jason": {
+    "head": {
+      "actions": {
+        "$load": {
+          "type": "$agent.request",
+          "options": {
+            "id": "$webcontainer",
+            "method": "login",
+            "params": ["alice", "1234"]
+          }
+        }
+      }
+    },
+    "body": {
+      "header": {
+        "title": "Love is true"
+      },
+      "background": {
+        "type": "html",
+        "url": "https://zababurinsv.github.io/android/",
+        "action": {
+          "trigger": "displayBanner"
+        }
+      }
+    }
+  }
+}
