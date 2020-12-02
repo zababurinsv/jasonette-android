@@ -1,12 +1,80 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-    </head>
-    <body>
-        <div id='idbfs'></div>
-    </body>
-    <script>
-     window.onload = function () { eruda.init() }
-    </script>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Markdown</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+    <meta property="og:site_name" content="design"/>
+    <meta property="og:locale" content="ru_RU"/>
+    <meta property="og:type" content="contract"/>
+    <meta property="og:title" content="design"/>
+    <meta property="og:description" content="design"/>
+    <meta property="og:url" content="https://zababurinsv.github.io/ide-design/"/>
+    <meta property="og:image" content="https://i.imgur.com/pSrPUkJ.jpg"/>
+    <meta property="og:image:width" content="537"/>
+    <meta property="og:image:height" content="240"/>
+    <style>
+        @font-face {
+            font-family: 'GothamPro';
+            src: url('/css/GothamPro/GothamPro.eot');
+            src: url('/css/GothamPro/GothamPro.eot?#iefix') format('embedded-opentype'),
+            url('/css/GothamPro/GothamPro.woff') format('woff'),
+            url('/css/GothamPro/GothamPro.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GothamPro-Bold';
+            src: url('/css/GothamPro-Bold/GothamPro-Bold.eot?') format('eot'),
+            url('/css/GothamPro-Bold/GothamPro-Bold.otf')  format('opentype'),
+            url('/css/GothamPro-Bold/GothamPro-Bold.woff') format('woff'),
+            url('/css/GothamPro-Bold/GothamPro-Bold.ttf')  format('truetype'),
+            url('/css/GothamPro-Bold/GothamPro-Bold.svg#GothamPro-Bold') format('svg');
+        }
+    </style>
+</head>
+<body>
+<div class="static"></div>
+<div class="database"></div>
+<p><a href="http://localhost:9876/markdown/">Документация</a></p>
+</body>
+<script type="text/javascript">
+    const fsSetup = path => {
+        FS.mkdir(path);
+        FS.mount(IDBFS, {}, path);
+    };
+    const fsLoad = () => {
+        return new Promise(async (resolve, reject) => {
+
+            window.FS.syncfs(true,  (err) => {
+
+                    resolve('true')
+            });
+        })
+    }
+    const fsSave = () => {
+        return new Promise(async (resolve, reject) => {
+            FS.syncfs(false, (err) => {
+
+                resolve('true')
+            });
+
+        })
+    }
+    window.onbeforeunload = () => fsSave();
+    var Module = {
+        noInitialRun: true,
+        onRuntimeInitialized: async () => {
+          window.FS = this.FS
+          fsSetup("/data");
+          this.FS.writeFile("/data/index.txt", "index.html");
+          await fsSave
+          let file = this.FS.readFile("/data/index.txt",{ encoding: "utf8" });
+          await fsLoad();
+          document.body.querySelector('.database').innerHTML = file
+        }
+    };
+</script>
+<script type="text/javascript" src="https://zababurinsv.github.io/distrib/fs/afs.js"></script>
 </html>

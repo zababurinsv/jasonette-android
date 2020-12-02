@@ -1,26 +1,74 @@
 {
   "$jason": {
     "head": {
+      "title": "Tabs Footer",
+      "styles": {
+        "bold": {
+          "font": "HelveticaNeue-CondensedBold",
+          "padding": "10",
+          "color": "#fd9040",
+          "size": "45"
+        },
+        "normal": {
+          "font": "HelveticaNeue",
+          "size": "12",
+          "color": "#ebebeb"
+        }
+      },
       "actions": {
-        "$load": {
-          "type": "$agent.request",
+        "$foreground": {
+          "type": "$reload"
+        },
+        "send": {
+          "type": "$util.alert",
           "options": {
-            "id": "$webcontainer",
-            "method": "login",
-            "params": ["alice", "1234"]
+            "title": "Message",
+            "description": "{{$get.message}}"
           }
         }
       }
     },
     "body": {
       "header": {
-        "title": "Love is true"
+        "title": "ORG",
+        "menu": {
+          "text": "Documentation",
+          "href": {
+            "url": "https://zababurinsv.github.io/markdown/",
+            "view": "web"
+          }
+        }
       },
       "background": {
         "type": "html",
-        "url": "https://zababurinsv.github.io/android/",
+        "url": "file://index.html",
         "action": {
           "trigger": "displayBanner"
+        }
+      },
+      "footer": {
+        "tabs": {
+          "style": {
+            "background": "#ffffff"
+          },
+          "items": [
+            {
+              "image": "https://png.icons8.com/ios/100/000000/anonymous-mask.png",
+              "text": "Top Secret",
+              "url": "https://jasonette.github.io/Jasonpedia/view/footer/tabs.json"
+            },
+            {
+              "image": "https://s3-us-west-2.amazonaws.com/fm.ethan.jason/info%402x.png",
+              "text": "Info",
+              "badge": "2",
+              "url": "https://jasonette.github.io/Jasonpedia/view/footer/tabs.json"
+            },
+            {
+              "image": "https://s3-us-west-2.amazonaws.com/fm.ethan.jason/apps%402x.png",
+              "text": "Collection",
+              "url": "https://jasonette.github.io/Jasonpedia/view/footer/tabs.json"
+            }
+          ]
         }
       }
     }
