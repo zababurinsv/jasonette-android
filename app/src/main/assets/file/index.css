@@ -2,4 +2,5 @@ body {
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
+    background-color: aqua;
 }
